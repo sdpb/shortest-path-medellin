@@ -1,16 +1,13 @@
 class Node:
-    def __init__(self, point, way):
-        self.associated_ways = [way]
+    def __init__(self, point):
         self.point = point
-        self.name = way.NOMBRE
-        self.id = str(way.OBJECTID)
-        for _ in self.associated_ways[1:]:
-            self.id += ' ' + str(_.OBJECTID)
+        self.associated_ways = []
 
     def __str__(self):
-        # return str(self.point)
-        return str(self.id)  # + ' ' + str(self.name)
-        # return str(self.point) + ' ' + str(self.id) + ' ' + str(self.name)
+        id = 'X: {} Y: {}'.format(round(self.point.x, 4), round(self.point.y, 4))
+        for _ in self.associated_ways:
+            id += ' - {}'.format(_.OBJECTID)
+        return id
 
 
 class Way:
