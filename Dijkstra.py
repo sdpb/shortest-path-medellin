@@ -5,7 +5,7 @@ from shapely.geometry import Point, MultiPoint
 from shapely.ops import unary_union
 from itertools import combinations, permutations
 from Way import Way, Node
-import networkx as nx
+from networkx import Graph as nx_graph
 
 data_frame = []
 geoms = []
@@ -83,33 +83,14 @@ def multi_intersection_process(intersects):
         return [first_point, second_point]
 
 
-# Needs improve
-def make_nodes(data_f, time, nodelist):
-    aux_points = []
-    G = nx.Graph()
-    index = len(data_f) - 1
-    flag = True
-    flag2 = True
-    print('Loading...')
-    for way in data_f:
-        print(index, 'Left')
-        for way_point in way.INTERSECTIONS:
-            node_u = Node(way_point, way)
-            for another_way in data_f[-index:]:
-                if way_point in aux_points:
-                    flag2 = False
-                    break
-                elif way_point in another_way.INTERSECTIONS:
-                    node_u.associated_ways.append(another_way)
-                    flag = False
-            if not flag and way_point not in aux_points:
-                flag = True
-                aux_points.append(way_point)
-                nodelist.append(node_u)
-            elif flag2:
-                nodelist.append(node_u)
-            flag2 = True
-        index -= 1
+def make_nodes(intersections, data_f, time, nodelist):
+    G = nx_graph()
+    for intersection in intersections:
+        node_u = Node(intersection)
+        for way in data_f:
+            if intersection in way.INTERSECTIONS:
+                node_u.associated_ways.append(way)
+        nodelist.append(node_u)
     weight(nodelist, time, G)
     return G
 
@@ -139,10 +120,10 @@ def graphics(graph, intersects):
     show()
 
 
-def exe(data):
+def exe(node_1=11, node_2=12):
     read_with_GeoPandas(fp)
     intersects = get_intersections(geoms)
-    graph = make_nodes(data_frame[:data], 'lluvioso', node_list)
+    graph = make_nodes(intersects, data_frame, 'lluvioso', node_list)
 
     print('\n************* Node List *******************\n')
 
@@ -150,7 +131,7 @@ def exe(data):
         print(str(_))
 
     print('\n************* Shortest Path *******************\n')
-    for _ in dijkstra_path(graph, node_list[11], node_list[12]):
+    for _ in dijkstra_path(graph, node_list[node_1], node_list[node_2]):
         print(_)
 
     # print(dijkstra_path_length(graph, node_list[11], node_list[12]))
