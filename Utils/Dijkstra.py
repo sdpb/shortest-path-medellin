@@ -8,8 +8,8 @@ from networkx import DiGraph
 from colorama import init, Fore
 
 # Locals
-from Way import Way
-from Node import Node
+from Utils.Way import Way
+from Utils.Node import Node
 
 data_frame = []
 geoms = []

@@ -1,5 +1,5 @@
 from argparse import ArgumentParser
-from Dijkstra import exe
+from Utils.Dijkstra import exe
 
 parser = ArgumentParser()
 
