@@ -165,15 +165,16 @@ def exe(node_1, node_2, rain, rt_out, sv_out):
     intersects = get_intersections(geoms)
     graph = make_nodes(intersects, data_frame, rain, node_list)
 
-    write_nodelist('nodelist.txt')
+    write_nodelist('Examples/nodelist.txt')
     print('\nShortest Path...\n')
     for _ in dijkstra_path(graph, node_list[node_1], node_list[node_2]):
         print(_)
 
-    print('\nLength from {} to {} is: {}'.format(
+    print('\nLength from {} to {} is: {}\n'.format(
         node_1, node_2, dijkstra_path_length(graph, node_list[node_1], node_list[node_2])))
 
     graphic_map(intersects, rt_out, sv_out)
     graphic_graph(graph, rt_out, sv_out)
     print('Successfully saved. Have a nice day ;)')
-    show()
+    if rt_out:
+        show()
