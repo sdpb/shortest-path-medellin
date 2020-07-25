@@ -125,8 +125,8 @@ def graphic_map(intersects, rt_out, sv_out):
     pts = GeoDataFrame([[intersects]], columns=['geometry'])  # GeoDataFrame
     pts.plot(ax=ax, marker='o', color='red', markersize=15)
     if sv_out:
-        print('\nSaving map graphic...\n')
-        savefig('map.svg', format='svg', dpi=12000)
+        print('\nSaving Map graphic...\n')
+        savefig('Examples/Map.svg', format='svg', dpi=12000)
     if rt_out:
         show(block=False)
 
@@ -142,7 +142,7 @@ def graphic_graph(graph, rt_out, sv_out):
     draw(graph, with_labels=True, ax=ax, node_size=15)
     if sv_out:
         print('\nSaving Graph graphic...\n')
-        savefig('graph.svg', format='svg', dpi=12000)
+        savefig('Examples/Graph.svg', format='svg', dpi=12000)
     if rt_out:
         show(block=False)
 
