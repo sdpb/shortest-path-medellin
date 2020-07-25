@@ -1,4 +1,4 @@
-class way:
+class Way:
     def __init__(self, row, intersections):
         self.OBJECTID = row['OBJECTID']
         self.NOMBRE = row['NOMBRE']
