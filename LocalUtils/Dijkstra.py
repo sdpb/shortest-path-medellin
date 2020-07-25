@@ -1,15 +1,14 @@
 from matplotlib.pyplot import subplots, show, savefig
-from networkx import draw, dijkstra_path, dijkstra_path_length
+from networkx import draw, dijkstra_path, dijkstra_path_length, DiGraph
 from geopandas import GeoDataFrame, read_file
 from shapely.geometry import Point, MultiPoint
 from shapely.ops import unary_union
 from itertools import combinations, permutations
-from networkx import DiGraph
 from colorama import init, Fore
 
 # Locals
-from Utils.Way import Way
-from Utils.Node import Node
+from LocalUtils.Way import Way
+from LocalUtils.Node import Node
 
 data_frame = []
 geoms = []
